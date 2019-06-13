@@ -173,9 +173,9 @@ class MTDevice(object):
                 print "ack (0x%02X) expected, got 0x%02X instead" % \
                     (mid+1, mid_ack)
         else:
-            raise MTException("Ack (0x%02X) expected, MID 0x%02X received "
-                              "instead (after %d retries)." % (mid+1, mid_ack,
-                                                               n_retries))
+             raise MTException("Ack (0x%02X) expected, MID 0x%02X received "
+                               "instead (after %d retries)." % (mid+1, mid_ack,
+                                                                n_retries))
         return data_ack
 
     def _ensure_config_state(self):
@@ -580,6 +580,7 @@ class MTDevice(object):
         """Initiate the "no rotation" procedure to estimate gyro biases."""
         self._ensure_measurement_state()
         data = struct.pack('!H', duration)
+        print "MID",MID.SetNoRotation, "\ndata\n",data
         self.write_ack(MID.SetNoRotation, data)
 
     def GetUTCTime(self):
